@@ -7,6 +7,8 @@ import { databaseConfig } from './config/database.config';
 import { DatabaseModule } from './database/database.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { CategoriesModule } from './categories/categories.module';
+import { RoomsModule } from './rooms/rooms.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -15,7 +17,9 @@ import { AuthModule } from './auth/auth.module';
     }),
     DatabaseModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    CategoriesModule,
+    RoomsModule
   ],
   controllers: [AppController],
   providers: [AppService],
