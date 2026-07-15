@@ -9,6 +9,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { RoomsModule } from './rooms/rooms.module';
+import { EventsModule } from './events/events.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,7 +20,8 @@ import { RoomsModule } from './rooms/rooms.module';
     UsersModule,
     AuthModule,
     CategoriesModule,
-    RoomsModule
+    RoomsModule,
+    EventsModule
   ],
   controllers: [AppController],
   providers: [AppService],

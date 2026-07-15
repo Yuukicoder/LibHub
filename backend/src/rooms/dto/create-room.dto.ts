@@ -29,7 +29,7 @@ export class CreateRoomDto {
     @MaxLength(500)
     description?: string;
 
-    @IsString()
+    @IsOptional()
      @IsEnum(RoomStatus)
     status?:RoomStatus
 }
