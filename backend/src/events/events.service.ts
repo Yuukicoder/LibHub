@@ -204,6 +204,13 @@ export class EventsService {
             }
             return event;
     }
+    async findRawById(id: string){
+        const event = await this.eventModel.findById(id).exec();
+        if(!event){
+            throw new NotFoundException("Event not found")
+        }
+        return event
+    }
 
     async update(id: string, updateEventDto: UpdateEventDto){
         const event = await this.eventModel.findById(id).exec();
