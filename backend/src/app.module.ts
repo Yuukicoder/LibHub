@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { CategoriesModule } from './categories/categories.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { EventsModule } from './events/events.module';
+import { SchedulesModule } from './schedules/schedules.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -21,7 +22,8 @@ import { EventsModule } from './events/events.module';
     AuthModule,
     CategoriesModule,
     RoomsModule,
-    EventsModule
+    EventsModule,
+    SchedulesModule
   ],
   controllers: [AppController],
   providers: [AppService],
