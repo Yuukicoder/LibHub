@@ -59,6 +59,9 @@ export class EventsService {
             },
             startTime:{
                 $lt: endTime
+            },
+            endTime:{
+                $gt: startTime
             }
         }
         if(excludedEventId){
@@ -141,10 +144,10 @@ export class EventsService {
         const filter : QueryFilter<EventDocument> = {};
         if(keyword){
             filter.$or = [
-                {
-                    title: {$regex: keyword, $options: "i"},
-                    description: {$regex: keyword, $options: "i"},
-            }
+                
+                    {title: {$regex: keyword, $options: "i"}},
+                   { description: {$regex: keyword, $options: "i"}}
+            
             ]
         }
 
