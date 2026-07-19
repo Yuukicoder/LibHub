@@ -3,36 +3,42 @@ import { SchedulesService } from './schedules.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreateScheduleDto } from './dto/create-schedule.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
+import { RolesGuards } from 'src/common/guards/roles.guards';
+import { UserRole } from 'src/common/enums/user-role.enum';
+import { Roles } from 'src/common/decorators/roles.decorator';
 
-@UseGuards(JwtAuthGuard)
-@Controller('schedules')
+@UseGuards(JwtAuthGuard, RolesGuards)
+@Controller()
 export class SchedulesController {
     constructor(
         private readonly schedulesService: SchedulesService
     ){}
 
+    @Roles(UserRole.ADMIN, UserRole.STAFF)
     @Post('events/:eventId/schedules')
-    create(@Param() eventId: string, @Body() createScheduleDto: CreateScheduleDto){
+    create(@Param('eventId') eventId: string, @Body() createScheduleDto: CreateScheduleDto){
         return this.schedulesService.create(eventId, createScheduleDto)
     }
 
     @Get('events/:eventId/schedules')
-    findByEvent(@Param() eventId: string){
+    findByEvent(@Param('eventId') eventId: string){
         return this.schedulesService.findByEvent(eventId)
     }
 
     @Get('schedules/:id')
-    findOne(@Param() scheduleId: string){
-        return this.schedulesService.findOne(scheduleId)
+    findOne(@Param('id') id: string){
+        return this.schedulesService.findOne(id)
     }
 
+    @Roles(UserRole.ADMIN, UserRole.STAFF)
     @Patch('schedules/:id')
-    update(@Param() scheduleId: string, @Body() updateScheduleDto: UpdateScheduleDto){
-        return this.schedulesService.update(scheduleId, updateScheduleDto)
+    update(@Param('id') id: string, @Body() updateScheduleDto: UpdateScheduleDto){
+        return this.schedulesService.update(id, updateScheduleDto)
     }
     
+    @Roles(UserRole.ADMIN, UserRole.STAFF)
     @Delete('schedules/:id')
-    remove(@Param() scheduleId: string){
-        return this.schedulesService.remove(scheduleId)
+    remove(@Param("id") id: string){
+        return this.schedulesService.remove(id)
     }
 } 

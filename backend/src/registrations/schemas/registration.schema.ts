@@ -1,8 +1,12 @@
-import { Prop, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument, Types } from "mongoose";
 import { RegistrationStatus } from "../enums/registration-status.enum";
 
 export type RegistrationDocument = HydratedDocument<Registration>
+@Schema({
+    timestamps: true,
+    collection: "registrations"
+})
 export class Registration {
     @Prop({
         type: Types.ObjectId,

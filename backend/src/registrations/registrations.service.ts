@@ -141,5 +141,38 @@ export class RegistrationsService {
             message: "Check-in successfully",
             registration
         }
+
     }
+    
+
+    async findAllForAdmin() {
+  return this.registrationModel
+    .find()
+    .populate('userId', 'fullName email')
+    .populate(
+      'eventId',
+      'title slug thumbnail startTime endTime status',
+    )
+    .sort({ createdAt: -1 })
+    .lean();
+}
+
+async cancelByAdmin(id: string) {
+  const registration = await this.registrationModel.findById(id);
+
+  if (!registration) {
+    throw new NotFoundException('Registration not found');
+  }
+
+  if (registration.status !== RegistrationStatus.REGISTERED) {
+    throw new BadRequestException(
+      'Only registered registration can be cancelled',
+    );
+  }
+
+  registration.status = RegistrationStatus.CANCELlED;
+  registration.cancelledAt = new Date();
+
+  return registration.save();
+}
 }
