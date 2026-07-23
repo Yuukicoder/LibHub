@@ -24,6 +24,11 @@ export class SchedulesController {
     findByEvent(@Param('eventId') eventId: string){
         return this.schedulesService.findByEvent(eventId)
     }
+    
+    @Get('schedules')
+    findAllSchedule(){
+        return this.schedulesService.getAllSchedule();
+    }
 
     @Get('schedules/:id')
     findOne(@Param('id') id: string){
