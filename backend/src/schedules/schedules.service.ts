@@ -164,6 +164,12 @@ export class SchedulesService {
             schedule
         }
     }
-
+    async getAllSchedule(){
+        const schedule = await this.scheduleModel.find();
+        if(schedule.length === 0){
+            throw new BadRequestException("Empty schedule")
+        }
+        return schedule;
+    }
     
 }
